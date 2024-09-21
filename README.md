@@ -1,13 +1,11 @@
 # Open in Pandas  
-This is a quick way that you can add a right click context to open a csv, xlsx, or json file in an interactive python instance. Note that the name is kind of a misnomer since json files don't actually use pandas. They load as a dictioanry as default. I will probably add other files as I go along. **Also it is doubly a misnomer now that I use polars instead of pandas since it is *so much* faster. I just don't want to break things right now. In the future, I will probably give it a more neutral name like term inspect.** 
+This is a quick way that you can add a right click context to open a csv, xlsx, or json file in an interactive python instance. Note that the name is kind of a misnomer since json files don't actually use pandas. They load as a dictioanry as default. I will probably add other files as I go along.
 
 ## Prerequisites
 
 - Python installed and added to PATH
-- ~~Pandas~~ Polars library installed (`pip install polars matplotlib` and others)
+- Pandas library installed (`pip install pandas matplotlib` and others)
 - Administrative access to modify the Windows Registry
-
-Note: matplotlib is not directly used nor really required, but it is nice to have for plotting the data so that you can do a `plt.show()` to show the plot data after doing a `df.plot()`. 
 
 ## Steps
 
