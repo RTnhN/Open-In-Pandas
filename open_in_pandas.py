@@ -1,4 +1,4 @@
-import pandas as pd
+import polars as pl
 import json
 import sys
 import os
@@ -12,10 +12,10 @@ else:
     
     try:
         if file_ext == '.csv':
-            df = pd.read_csv(file_path)
+            df = pl.read_csv(file_path)
             print(f"CSV file '{file_path}' loaded into DataFrame 'df'.")
         elif file_ext == '.xlsx':
-            df = pd.read_excel(file_path)
+            df = pl.read_excel(file_path)
             print(f"Excel file '{file_path}' loaded into DataFrame 'df'.")
         elif file_ext == '.json':
             with open(file_path, 'r') as f:
