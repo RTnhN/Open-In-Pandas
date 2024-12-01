@@ -1,10 +1,10 @@
 # Open in Pandas  
-This is a quick way that you can add a right click context to open a csv, xlsx, or json file in an interactive python instance. Note that the name is kind of a misnomer since json files don't actually use pandas. They load as a dictionary as default. I will probably add other files as I go along.
+This is a quick way that you can add a right click context to open a csv, xlsx, json, or c3d file in an interactive python instance. Note that the name is kind of a misnomer since json files don't actually use pandas. They load as a dictionary as default. I will probably add other files as I go along.
 
 ## Prerequisites
 
 - Python installed and added to PATH
-- Pandas library installed (`pip install pandas matplotlib` and others)
+- Pandas library installed (`pip install pandas matplotlib ezc3d` and others). You can also use the requirements.txt file to install all the dependencies.
 - Administrative access to modify the Windows Registry
 
 ## Steps
