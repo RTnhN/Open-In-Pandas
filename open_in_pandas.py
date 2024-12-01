@@ -22,7 +22,7 @@ else:
             df = pd.read_excel(file_path)
             print(f"Excel file '{file_path}' loaded into DataFrame 'df'.")
         elif file_ext == ".json":
-            with open(file_path, "r") as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             print(f"JSON file '{file_path}' loaded into dictionary 'data'.")
         else:
