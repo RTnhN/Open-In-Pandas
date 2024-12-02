@@ -1,3 +1,4 @@
 pandas
 matplotlib
 ezc3d
+h5py
