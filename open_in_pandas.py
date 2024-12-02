@@ -3,6 +3,7 @@ import json
 import sys
 import os
 import ezc3d
+import h5py
 
 # Even though we don't use matplotlib here, it is nice to have it
 # for when you want to plot the data. So when you plot with
@@ -94,9 +95,17 @@ else:
             print(
                 f"""C3D file '{file_path}' loaded into dictionary 'data'.\nDataframes of the data: 'df_points' and 'df_analog'.\npoints_rate = {points_rate} and analog_rate = {analog_rate}."""
             )
+        elif file_ext == ".h5":
+            data = h5py.File(file_path, "r")
+            print(
+                f"HDF5 file '{file_path}' loaded into variable 'data'. Explore with `data.keys()`."
+            )
         else:
             print(f"Unsupported file type: {file_ext}")
             sys.exit(1)
+        print(
+            "You can also directly access the data path with the `file_path` variable."
+        )
     except Exception as e:
         print(f"Error loading file: {e}")
         sys.exit(1)
