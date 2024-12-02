@@ -1,4 +1,7 @@
 # Open in Pandas  
+
+![Usage](Assets/usage.gif)
+
 This is a quick way that you can add a right click context to open a csv, xlsx, json, c3d, or h5 file in an interactive python instance. Note that the name is kind of a misnomer since json files or h5 files don't actually use pandas. json loads as a dictionary as default, and h5 loads with its unique format. I will probably add other files as I go along.
 
 ## Prerequisites
