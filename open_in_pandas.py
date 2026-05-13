@@ -9,6 +9,19 @@ import h5py
 # for when you want to plot the data. So when you plot with
 # `df.plot()`, you can use `plt.show()` to show the plot.
 import matplotlib.pyplot as plt
+import mplcursors
+
+
+def enable_hover():
+    cursor = mplcursors.cursor(plt.gca().lines, hover=True)
+
+    @cursor.connect("add")
+    def on_add(sel):
+        x, y = sel.target
+        label = sel.artist.get_label()
+        sel.annotation.set(text=f"{label}\nIndex: {x:g}\nValue: {y:g}")
+
+    return cursor
 
 
 def c3d_to_dict(path):
