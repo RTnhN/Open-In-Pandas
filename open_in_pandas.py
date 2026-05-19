@@ -24,6 +24,10 @@ def enable_hover():
     return cursor
 
 
+def plot():
+    cursor = enable_hover()
+    plt.show()
+
 def c3d_to_dict(path):
     c3d = ezc3d.c3d(path)
 
