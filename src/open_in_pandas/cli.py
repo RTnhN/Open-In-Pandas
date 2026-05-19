@@ -25,9 +25,9 @@ class UnsupportedFileTypeError(OpenInPandasError):
     """Raised when a selected file extension is not supported."""
 
 
-def _missing_dependency(extra: str, package_name: str, exc: Exception) -> OpenInPandasError:
+def _missing_dependency(package_name: str, exc: Exception) -> OpenInPandasError:
     return OpenInPandasError(
-        f"Missing optional dependency '{package_name}'. Install it with `uv sync --extra {extra}`."
+        f"Missing dependency '{package_name}'. Run `uv sync` to install project dependencies."
     )
 
 
@@ -36,7 +36,7 @@ def _load_plot_modules() -> tuple[Any, Any]:
         import matplotlib.pyplot as plt
         import mplcursors
     except ImportError as exc:
-        raise _missing_dependency("plot", "matplotlib mplcursors", exc)
+        raise _missing_dependency("matplotlib mplcursors", exc)
     return plt, mplcursors
 
 
@@ -63,7 +63,7 @@ def c3d_to_dict(path: Path) -> dict[str, Any]:
     try:
         import ezc3d
     except ImportError as exc:
-        raise _missing_dependency("c3d", "ezc3d", exc)
+        raise _missing_dependency("ezc3d", exc)
 
     c3d = ezc3d.c3d(str(path))
     header = c3d["header"]
@@ -156,7 +156,7 @@ def load_hdf5(path: Path) -> tuple[dict[str, Any], str]:
     try:
         import h5py
     except ImportError as exc:
-        raise _missing_dependency("hdf5", "h5py", exc)
+        raise _missing_dependency("h5py", exc)
 
     data = h5py.File(path, "r")
     return {"data": data}, f"HDF5 file '{path}' loaded into `data`. Explore with `data.keys()`."
@@ -197,9 +197,24 @@ def build_namespace(path: Path) -> tuple[dict[str, Any], str]:
 
     banner += "\n`file_path` is always available."
     if "plt" not in namespace:
-        banner += "\nInstall the `plot` extra to enable `plot()` and `plt`."
+        banner += "\nRun `uv sync` to restore plotting dependencies and enable `plot()` and `plt`."
 
     return namespace, banner
+
+
+def embed_shell(namespace: dict[str, Any], banner: str) -> None:
+    try:
+        from IPython import embed
+    except ImportError:
+        code.interact(banner=banner, local=namespace)
+        return
+
+    embed(
+        header=banner,
+        user_ns=namespace,
+        colors="neutral",
+        using="asyncio",
+    )
 
 
 def open_interactive(file_path: str | os.PathLike[str]) -> int:
@@ -208,7 +223,7 @@ def open_interactive(file_path: str | os.PathLike[str]) -> int:
         raise OpenInPandasError(f"File not found: {path}")
 
     namespace, banner = build_namespace(path)
-    code.interact(banner=banner, local=namespace)
+    embed_shell(namespace, banner)
     return 0
 
 
@@ -238,7 +253,7 @@ def install_menu(label: str = MENU_LABEL, icon: str | os.PathLike[str] | None = 
     try:
         from context_menu import menus
     except ImportError as exc:
-        raise _missing_dependency("menu", "context-menu", exc)
+        raise _missing_dependency("context-menu", exc)
 
     menu = menus.FastCommand(
         label,
@@ -258,7 +273,7 @@ def uninstall_menu(label: str = MENU_LABEL) -> int:
     try:
         from context_menu import menus
     except ImportError as exc:
-        raise _missing_dependency("menu", "context-menu", exc)
+        raise _missing_dependency("context-menu", exc)
 
     menus.removeMenu(label, "FILES")
     print(f"Removed Windows Explorer menu '{label}'.")
