@@ -194,6 +194,7 @@ def build_namespace(path: Path) -> tuple[dict[str, Any], str]:
         pass
     else:
         namespace["plt"] = plt
+        banner += "\n`plot()` provides hover cursor labels for line plots."
 
     banner += "\n`file_path` is always available."
     if "plt" not in namespace:
@@ -295,7 +296,7 @@ def launch_from_menu(file_path: str) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="open-in-pandas",
+        prog="oi",
         description="Open supported data files in an interactive Python session.",
     )
     subparsers = parser.add_subparsers(dest="command")

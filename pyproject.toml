@@ -19,7 +19,7 @@ dependencies = [
 ]
 
 [project.scripts]
-open-in-pandas = "open_in_pandas:main"
+oi = "open_in_pandas:main"
 
 [build-system]
 requires = ["uv_build>=0.8.23,<0.9.0"]

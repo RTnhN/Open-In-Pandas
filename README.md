@@ -17,7 +17,7 @@ uv sync
 Open a file directly:
 
 ```bash
-uv run open-in-pandas path/to/file.csv
+uv run oi path/to/file.csv
 ```
 
 This opens an interactive session with:
@@ -34,21 +34,21 @@ This opens an interactive session with:
 Install the Explorer entry:
 
 ```bash
-uv run open-in-pandas install-menu
+uv run oi install-menu
 ```
 
 That command uses the repository's `icon.ico` automatically when it is present. You can override it with a custom icon:
 
 ```bash
-uv run open-in-pandas install-menu --icon "C:\path\to\custom.ico"
+uv run oi install-menu --icon "C:\path\to\custom.ico"
 ```
 
 Remove it later:
 
 ```bash
-uv run open-in-pandas uninstall-menu
+uv run oi uninstall-menu
 ```
 
 The menu is installed through `context-menu` and writes to the current user's registry hive, so manual Registry Editor steps are no longer required.
 On Windows 11, the entry may appear under `Show more options`.
-If you update the project after installing the menu, run `uv run open-in-pandas uninstall-menu` and then `uv run open-in-pandas install-menu` to refresh the registered command.
+If you update the project after installing the menu, run `uv run oi uninstall-menu` and then `uv run oi install-menu` to refresh the registered command.
